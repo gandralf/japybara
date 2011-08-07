@@ -13,9 +13,21 @@
         <load-on-startup>0</load-on-startup>
     </servlet>
 
+    <servlet>
+        <servlet-name>ViewServlet</servlet-name>
+        <servlet-class>org.japybara.ViewServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+
+
     <servlet-mapping>
         <servlet-name>HelloServlet</servlet-name>
         <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ViewServlet</servlet-name>
+        <url-pattern>/view</url-pattern>
     </servlet-mapping>
 
 </web-app>

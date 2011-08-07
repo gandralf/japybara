@@ -26,4 +26,10 @@ public class WebIntegrationTestTest extends WebIntegrationTest {
         assertTrue(hasContent("John"));
         assertEquals("text/plain", page.getContentType());
     }
+
+    @Test
+    public void shouldRenderJSP() throws IOException {
+        visit("/view");
+        assertTrue(hasContent("Hello, John Malkovich!"));
+    }
 }
