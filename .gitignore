@@ -1,0 +1,9 @@
+*.class
+*.jar
+target
+src/test/webapp/WEB-INF/classes
+src/test/webapp/WEB-INF/lib
+*.iml
+*.ipr
+*.iws
+.DS_Store
