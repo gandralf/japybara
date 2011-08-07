@@ -6,6 +6,7 @@ Japybara is a simple library intented to speedup integration testes. What it doe
 * It starts a jetty containter (fast!) before your integration tests, and kills it after.
 You can even interact with the server at (by default) http://localhost:8080/
 * Offers a really simple API: just create child of `WebIntegrationTest` and have fun:
+
     public class SomeIntegrationTest extends WebIntegrationTest {
         @Test
         public void shouldHit() throws IOException {
