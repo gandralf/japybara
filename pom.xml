@@ -4,11 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.devx</groupId>
+    <name>Japybara - integration tests made easy</name>
+
+    <groupId>org.japybara</groupId>
     <artifactId>japybara</artifactId>
-    <packaging>jar</packaging>
     <version>1.0</version>
-    <name>Web development - integration tests made easy</name>
+
+    <packaging>jar</packaging>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

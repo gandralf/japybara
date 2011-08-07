@@ -1,4 +1,4 @@
-package japybara;
+package org.japybara;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

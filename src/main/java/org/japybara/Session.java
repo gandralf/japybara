@@ -1,15 +1,52 @@
-package japybara;
+package org.japybara;
 
-public class Session {
+import java.io.IOException;
+import java.net.URL;
+
+public abstract class Session {
+    private URL contextUrl;
+    private URL currentUrl;
+    private WebPage currentPage;
+
+    public Session(URL contextUrl) {
+        this.contextUrl = contextUrl;
+        currentUrl = null;
+    }
+
+    /**
+     * Navigate to the given URL.
+     * @param path where to go
+     * @return the resulting page
+     * @throws java.net.MalformedURLException on invalid path
+     */
+    public abstract WebPage visit(String path) throws IOException;
+
+    /**
+     * @return Fully qualified URL of the current page.
+     */
+    public URL getCurrentURL() {
+        return currentUrl;
+    }
+
+    protected void setCurrentUrl(URL value) {
+        currentUrl = value;
+    }
+
+    protected URL getContextUrl() {
+        return contextUrl;
+    }
+
+    public WebPage getCurrentPage() {
+        return currentPage;
+    }
+
+    protected void setCurrentPage(WebPage currentPage) {
+        this.currentPage = currentPage;
+    }
+}
+
+
     /*
-    - (String) body (also: #html)
-    A snapshot of the HTML of the current document, as it looks right now (potentially modified by JavaScript).
-    - (String) current_host
-    Host of the current page.
-    - (String) current_path
-    Path of the current page, without any domain information.
-    - (String) current_url
-    Fully qualified URL of the current page.
     - (Object) document
     - (Object) driver
     - (Object) evaluate_script(script)
@@ -30,8 +67,6 @@ public class Session {
     HTML source of the document, before being modified by JavaScript.
     - (Integer) status_code
     Returns the current HTTP status code as an Integer.
-    - (Object) visit(url)
-    Navigate to the given URL.
     - (Object) wait_until(timeout = Capybara.default_wait_time)
     Retry executing the block until a truthy result is returned or the timeout time is exceeded.
     - (Object) within(*args)
@@ -45,4 +80,3 @@ public class Session {
     - (Object) within_window(handle, &blk)
     Execute the given block within the given window.
     */
-}

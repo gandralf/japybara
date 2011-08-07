@@ -1,4 +1,4 @@
-package japybara;
+package org.japybara;
 
 import org.junit.Test;
 
@@ -15,15 +15,15 @@ public class WebIntegrationTestTest extends WebIntegrationTest {
 
     @Test
     public void shouldReturnContent() throws IOException {
-        WebPage page = visit("/hello");
-        assertTrue(page.hasContent("Hello"));
+        visit("/hello");
+        assertTrue(hasContent("Hello"));
     }
 
     @Test
     public void shouldHandleHttpStuff() throws IOException {
         WebPage page = visit("/hello?name=John");
         assertEquals("/hello", getCurrentPath()); // Parameters
-        assertTrue(page.hasContent("John"));
-        // assertEquals("text/html", page.getContentType());
+        assertTrue(hasContent("John"));
+        assertEquals("text/plain", page.getContentType());
     }
 }
