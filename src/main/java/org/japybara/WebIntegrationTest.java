@@ -13,19 +13,26 @@ import java.net.URL;
 
 public class WebIntegrationTest {
     protected static Server server;
-    private static String context;
-    private static int port;
+    private static URL contextUrl;
     private Session session;
 
     @BeforeClass
     public static void startServer() throws Exception {
-        port = 8080;
-        server = new Server(port);
-        WebAppContext webapp = new WebAppContext("./src/test/webapp", "/");
+        contextUrl = new URL(env("japybara.app_host", "http://localhost:8080/"));
+        String webappPath = env("japybara.webapp", "./src/main/webapp");
+
+        server = new Server(contextUrl.getPort());
+        WebAppContext webapp = new WebAppContext(webappPath, contextUrl.getPath());
 
         server.addHandler(webapp);
 
         server.start();
+    }
+
+    private static String env(String name, String defaultValue) {
+        String result = System.getProperty(name);
+
+        return result != null ? result : defaultValue;
     }
 
     @AfterClass
@@ -35,7 +42,7 @@ public class WebIntegrationTest {
 
     @Before
     public void setUp() throws MalformedURLException {
-        session = new HtmlUnitSession(new URL("http://localhost:" + port));
+        session = new HtmlUnitSession(contextUrl);
     }
 
     public WebPage visit(String path) throws IOException {
