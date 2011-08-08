@@ -21,6 +21,18 @@ To test if the request "/hello/jmalk" returns a web page with `"Welcome back, Mr
 It grabs ideas from some rails test frameworks (mostly [Capybara](https://github.com/jnicklas/capybara))
 and [JWebUnit](http://jwebunit.sourceforge.net/).
 
+Extra: standalone server
+------------------------
+
+There is also a standalone server:
+
+    Usage: org.japybara.JappybaraServer [-p path] [-u url]
+    where
+        -p path    Webapp path. Default: ./src/main/webapp
+        -u url     Context url. Default: http://localhost:8080
+
+Smells like rails2's script/server
+
 TO DO
 =====
 I've just started this project, so there are LOTS of things to do, like to provide a (much!) richer DLS, configuration
