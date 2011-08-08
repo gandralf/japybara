@@ -7,7 +7,7 @@ Japybara is a simple library intented to speedup integration testes. What it doe
 You can even interact with the server at (by default) http://localhost:8080/
 * Offers a really simple API: just create child of `WebIntegrationTest` and have fun.
 
-To test if the request "/hello/jmalk" returns a web page with "`Welcome back, Mr. Malkovich!`", just do it:
+To test if the request "/hello/jmalk" returns a web page with `"Welcome back, Mr. Malkovich!"`, just do it:
 
     public class SomeIntegrationTest extends WebIntegrationTest {
         @Test
