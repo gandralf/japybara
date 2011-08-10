@@ -13,7 +13,7 @@ To test if the request "/hello/jmalk" returns a web page with `"Welcome back, Mr
         @Test
         public void shouldHit() throws IOException {
             visit("/hello/jmalk");
-            assertTrue(hasContent("Welcome back, Mr. Malkovich!"));
+            assertHasContent("Welcome back, Mr. Malkovich!");
         }
     }
 

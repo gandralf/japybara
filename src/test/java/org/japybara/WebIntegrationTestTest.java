@@ -16,20 +16,20 @@ public class WebIntegrationTestTest extends WebIntegrationTest {
     @Test
     public void shouldReturnContent() throws IOException {
         visit("/hello");
-        assertTrue(hasContent("Hello"));
+        assertHasContent("Hello");
     }
 
     @Test
     public void shouldHandleHttpStuff() throws IOException {
         WebPage page = visit("/hello?name=John");
         assertEquals("/hello", getCurrentPath()); // Parameters
-        assertTrue(hasContent("John"));
+        assertHasContent("John");
         assertEquals("text/plain", page.getContentType());
     }
 
     @Test
     public void shouldRenderJSP() throws IOException {
         visit("/view");
-        assertTrue(hasContent("Hello, John Malkovich!"));
+        assertHasContent("Hello, John Malkovich!");
     }
 }

@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static org.junit.Assert.fail;
+
 public class WebIntegrationTest {
     protected static Server server;
     private static URL contextUrl;
@@ -62,8 +64,9 @@ public class WebIntegrationTest {
         return session.getCurrentPage().getBody();
     }
 
-    public boolean hasContent(String str) {
-        return getBody().contains(str);
+    protected void assertHasContent(String expected) {
+        if (!getBody().contains(expected)) {
+            fail("Expected content not found: \"" + expected + "\"");
+        }
     }
-
 }
