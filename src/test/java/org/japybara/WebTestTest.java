@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import static org.junit.Assert.*;
 
-public class WebIntegrationTestTest extends WebIntegrationTest {
+public class WebTestTest extends WebTest {
     @Test
     public void shouldHit() throws IOException {
         visit("/hello");
