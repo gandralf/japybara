@@ -1,17 +1,17 @@
-Japybara - integration tests made easy
-======================================
+Japybara - web functional/integration/acceptance tests made easy
+================================================================
 
-Japybara is a simple library intented to speedup integration testes. What it does:
+Japybara is a simple library intented to speedup functional, integration or acceptance testes. What it does:
 
-* It starts a jetty containter (fast!) before your integration tests, and kills it after.
+* It starts a jetty containter (fast!) before your functional tests, and kills it after.
 You can even interact with the server at (by default) http://localhost:8080/
-* Offers a really simple API: just create child of `WebIntegrationTest` and have fun.
+* Offers a really simple API: just create child of `WebTest` and have fun.
 
 To test if the request "/hello/jmalk" returns a web page with `"Welcome back, Mr. Malkovich!"`, just do it:
 
-    public class SomeIntegrationTest extends WebIntegrationTest {
+    public class SomeFunctionalTest extends WebTest {
         @Test
-        public void shouldHit() throws IOException {
+        public void shouldSayHello() throws IOException {
             visit("/hello/jmalk");
             assertHasContent("Welcome back, Mr. Malkovich!");
         }
@@ -29,7 +29,7 @@ There is also a standalone server:
     Usage: org.japybara.JappybaraServer [-p path] [-u url]
     where
         -p path    Webapp path. Default: ./src/main/webapp
-        -u url     Context url. Default: http://localhost:8080
+        -u url     Context url. Default: http://localhost:8080/
 
 Smells like rails2's script/server
 

@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import static org.junit.Assert.*;
 
-public class WebIntegrationTestTest extends WebIntegrationTest {
+public class WebTestTest extends WebTest {
     @Test
     public void shouldHit() throws IOException {
         visit("/hello");
@@ -38,5 +38,15 @@ public class WebIntegrationTestTest extends WebIntegrationTest {
     public void shouldLookup() throws NamingException, IOException {
         visit("/jndi");
         assertHasContent("Hello, jndi!");
+    }
+
+    @Test
+    public void shouldManipulateForm() throws IOException {
+        WebPage page = visit("/form.html");
+        page.fillIn("name", "John");
+        page.clickButton("submit");
+
+        assertEquals("/hello", getCurrentPath());
+        assertHasContent("Hello, John![post]");
     }
 }

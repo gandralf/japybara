@@ -16,6 +16,15 @@ public class HelloServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        sayHello(request, response, "");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        sayHello(request, response, "[post]");
+    }
+
+    private void sayHello(HttpServletRequest request, HttpServletResponse response, String stuff) throws IOException {
         hitted = true;
         String name = request.getParameter("name");
         if (name == null) {
@@ -24,11 +33,6 @@ public class HelloServlet extends HttpServlet {
 
         response.setContentType("text/plain");
         PrintWriter writer = response.getWriter();
-        writer.print("Hello, " + name + "!");
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        writer.print("Hello, " + name + "!" + stuff);
     }
 }
