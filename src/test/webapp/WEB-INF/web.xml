@@ -19,6 +19,11 @@
         <load-on-startup>0</load-on-startup>
     </servlet>
 
+    <servlet>
+        <servlet-name>JndiServlet</servlet-name>
+        <servlet-class>org.japybara.JndiServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>HelloServlet</servlet-name>
@@ -29,5 +34,16 @@
         <servlet-name>ViewServlet</servlet-name>
         <url-pattern>/view</url-pattern>
     </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>JndiServlet</servlet-name>
+        <url-pattern>/jndi</url-pattern>
+    </servlet-mapping>
+
+    <env-entry>
+        <env-entry-name>hello</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>Hello, world!</env-entry-value>
+    </env-entry>
 
 </web-app>

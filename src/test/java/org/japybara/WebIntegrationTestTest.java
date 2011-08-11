@@ -2,6 +2,7 @@ package org.japybara;
 
 import org.junit.Test;
 
+import javax.naming.NamingException;
 import java.io.IOException;
 
 import static org.junit.Assert.*;
@@ -31,5 +32,11 @@ public class WebIntegrationTestTest extends WebIntegrationTest {
     public void shouldRenderJSP() throws IOException {
         visit("/view");
         assertHasContent("Hello, John Malkovich!");
+    }
+
+    @Test
+    public void shouldLookup() throws NamingException, IOException {
+        visit("/jndi");
+        assertHasContent("Hello, jndi!");
     }
 }
