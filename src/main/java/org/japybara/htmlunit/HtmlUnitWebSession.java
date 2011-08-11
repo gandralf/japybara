@@ -2,17 +2,17 @@ package org.japybara.htmlunit;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
-import org.japybara.Session;
+import org.japybara.WebSession;
 import org.japybara.WebPage;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class HtmlUnitSession extends Session {
+public class HtmlUnitWebSession extends WebSession {
     private WebClient webClient;
 
-    public HtmlUnitSession(URL contextUrl) {
+    public HtmlUnitWebSession(URL contextUrl) {
         super(contextUrl);
         webClient = new WebClient();
     }

@@ -3,12 +3,12 @@ package org.japybara;
 import java.io.IOException;
 import java.net.URL;
 
-public abstract class Session {
+public abstract class WebSession {
     private URL contextUrl;
     private URL currentUrl;
     private WebPage currentPage;
 
-    public Session(URL contextUrl) {
+    public WebSession(URL contextUrl) {
         this.contextUrl = contextUrl;
         currentUrl = null;
     }
@@ -53,8 +53,8 @@ public abstract class Session {
     Evaluate the given JavaScript and return the result.
     - (Object) execute_script(script)
     Execute the given script, not returning a result.
-    - (Session) initialize(mode, app = nil) constructor
-    A new instance of Session.
+    - (WebSession) initialize(mode, app = nil) constructor
+    A new instance of WebSession.
     - (Object) inspect
     - (Object) reset! (also: #cleanup!, #reset_session!)
     Reset the session, removing all cookies.
