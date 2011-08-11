@@ -40,6 +40,6 @@ public class WebTestTest extends WebTest {
         page.clickButton("submit");
 
         assertEquals("/hello", getCurrentPath());
-        assertHasContent("John");
+        assertHasContent("Hello, John![post]");
     }
 }
