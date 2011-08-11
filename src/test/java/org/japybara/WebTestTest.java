@@ -32,4 +32,14 @@ public class WebTestTest extends WebTest {
         visit("/view");
         assertHasContent("Hello, John Malkovich!");
     }
+
+    @Test
+    public void shouldManipulateForm() throws IOException {
+        WebPage page = visit("/form.html");
+        page.fillIn("name", "John");
+        page.clickButton("submit");
+
+        assertEquals("/hello", getCurrentPath());
+        assertHasContent("John");
+    }
 }
