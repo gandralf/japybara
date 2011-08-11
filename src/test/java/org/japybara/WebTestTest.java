@@ -1,5 +1,6 @@
 package org.japybara;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.naming.NamingException;
@@ -35,6 +36,7 @@ public class WebTestTest extends WebTest {
     }
 
     @Test
+    @Ignore
     public void shouldLookup() throws NamingException, IOException {
         visit("/jndi");
         assertHasContent("Hello, jndi!");
