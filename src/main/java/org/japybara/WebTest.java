@@ -17,7 +17,7 @@ import static org.junit.Assert.fail;
  * Base class for comprehensive web tests. It can be used in different kinds of tests: functional, integration
  * and even acceptance tests.
  *
- * Those tests not only runs your java code, like a tipical unit tests. It also uses all web related files, like
+ * Those tests not only runs your java code, like a typical unit tests. It also uses all web related files, like
  * <code>WEB-INF/web.xml</code>, templates/views (jsps) and assets (javascript, css, images, ...).
  * So, it's like startting up and doing a full deploy in your preferred web container, like tomcat or jetty
  * before running each web test. But it is automatic and really fast.

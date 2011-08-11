@@ -11,7 +11,7 @@ To test if the request "/hello/jmalk" returns a web page with `"Welcome back, Mr
 
     public class SomeFunctionalTest extends WebTest {
         @Test
-        public void shouldHit() throws IOException {
+        public void shouldSayHello() throws IOException {
             visit("/hello/jmalk");
             assertHasContent("Welcome back, Mr. Malkovich!");
         }
