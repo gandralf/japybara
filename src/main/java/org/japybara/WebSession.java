@@ -5,12 +5,10 @@ import java.net.URL;
 
 public abstract class WebSession {
     private URL contextUrl;
-    private URL currentUrl;
     private WebPage currentPage;
 
     public WebSession(URL contextUrl) {
         this.contextUrl = contextUrl;
-        currentUrl = null;
     }
 
     /**
@@ -25,11 +23,7 @@ public abstract class WebSession {
      * @return Fully qualified URL of the current page.
      */
     public URL getCurrentURL() {
-        return currentUrl;
-    }
-
-    protected void setCurrentUrl(URL value) {
-        currentUrl = value;
+        return currentPage.getUrl();
     }
 
     protected URL getContextUrl() {

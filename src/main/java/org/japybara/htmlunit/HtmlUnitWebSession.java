@@ -21,8 +21,7 @@ public class HtmlUnitWebSession extends WebSession {
     public WebPage visit(String path) throws IOException {
         Page page = webClient.getPage(buildUrl(path));
 
-        setCurrentUrl(page.getUrl());
-        setCurrentPage(new HtmlUnitWebPage(page));
+        setCurrentPage(new HtmlUnitWebPage(this, page));
 
         return getCurrentPage();
     }
@@ -32,5 +31,9 @@ public class HtmlUnitWebSession extends WebSession {
             uri = new StringBuilder().append("/").append(uri).toString();
         }
         return new URL(getContextUrl(), uri);
+    }
+
+    public void goneTo(HtmlUnitWebPage newPage) {
+        setCurrentPage(newPage);
     }
 }

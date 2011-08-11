@@ -43,4 +43,15 @@ public class WebTestHelperTest {
         WebPage page = session.visit("/view");
         assertHasContent(page, "Hello, John Malkovich!");
     }
+
+    @Test
+    public void shouldManipulateForm() throws IOException {
+        WebPage page = session.visit("/form.html");
+        page.fillIn("name", "John");
+        page.clickButton("submit");
+
+
+        assertEquals("/hello", session.getCurrentURL().getPath());
+        assertHasContent(session.getCurrentPage(), "Hello, John![post]");
+    }
 }

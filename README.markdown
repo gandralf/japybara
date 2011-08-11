@@ -9,21 +9,20 @@ You can even interact with the server at (by default) http://localhost:8080/
 
 To test if the request "/hello/jmalk" returns a web page with `"Welcome back, Mr. Malkovich!"`, just do it:
 
-   public class SomeFunctionalTest {
+    public class SomeFunctionalTest {
        private WebSession session;
 
-       &#064;Before
+       @Before
        public void setUp() throws WebTestException {
            session = WebTestHelper.newSession();
        }
 
-       &#064;Test
+       @Test
        public void shouldSayHallo() throws IOException {
            WebPage page = session.visit("/hello/jmalk");
            WebTestHelper.assertHasContent(page, "Welcome back, Mr. Malkovich!");
        }
-   }
-
+    }
 
 It grabs ideas from some rails test frameworks (mostly [Capybara](https://github.com/jnicklas/capybara))
 and [JWebUnit](http://jwebunit.sourceforge.net/).
