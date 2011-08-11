@@ -11,10 +11,10 @@ import java.io.IOException;
 import java.net.URL;
 
 public class HtmlUnitWebPage implements WebPage {
-    private HtmlUnitSession session;
+    private HtmlUnitWebSession session;
     private Page page;
 
-    public HtmlUnitWebPage(HtmlUnitSession session, Page page) {
+    public HtmlUnitWebPage(HtmlUnitWebSession session, Page page) {
         this.session = session;
 
         this.page = page;
