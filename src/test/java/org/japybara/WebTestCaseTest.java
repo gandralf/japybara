@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import static org.junit.Assert.*;
 
-public class WebTestTest extends WebTest {
+public class WebTestCaseTest extends WebTestCase {
     @Test
     public void shouldHit() throws IOException {
         visit("/hello");

@@ -26,7 +26,7 @@ import static org.junit.Assert.fail;
  * The following code ilustrates its use.
  *
  * <pre>{@code
- * public class SomeIntegrationTest extends WebTest {
+ * public class SomeIntegrationTest extends WebTestCase {
  *     &#064;Test
  *     public void shouldHit() throws IOException {
  *         visit("/hello/jmalk");
@@ -55,7 +55,7 @@ import static org.junit.Assert.fail;
  * <li><em>japybara.webapp</em>: path to webapp directory. Default: <code>src/main/webapp</code></li>
  * </ul>
  */
-public class WebTest {
+public class WebTestCase {
     protected static Server server;
     private static URL contextUrl;
     private Session session;
@@ -85,6 +85,10 @@ public class WebTest {
 
     public WebPage visit(String path) throws IOException {
         return session.visit(path);
+    }
+
+    public WebPage getCurrentPage() {
+        return session.getCurrentPage();
     }
 
     // Helper methods

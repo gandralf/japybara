@@ -9,7 +9,7 @@ You can even interact with the server at (by default) http://localhost:8080/
 
 To test if the request "/hello/jmalk" returns a web page with `"Welcome back, Mr. Malkovich!"`, just do it:
 
-    public class SomeFunctionalTest extends WebTest {
+    public class SomeFunctionalTest extends WebTestCase {
         @Test
         public void shouldSayHello() throws IOException {
             visit("/hello/jmalk");
