@@ -9,7 +9,7 @@ public interface WebPage {
     Object getContentType();
 
     void fillIn(String locator, String value);
-    void clickButton(String locator) throws IOException;
+    void click(String locator) throws IOException;
 
     URL getUrl();
 }

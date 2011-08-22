@@ -1,14 +1,20 @@
 package org.japybara;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.net.URL;
+import java.util.Stack;
 
 public abstract class Session {
+    private static final Logger log = LoggerFactory.getLogger(Session.class);
+    private Stack<WebPage> history;
     private URL contextUrl;
-    private WebPage currentPage;
 
     public Session(URL contextUrl) {
         this.contextUrl = contextUrl;
+        history = new Stack<WebPage>();
     }
 
     /**
@@ -23,7 +29,7 @@ public abstract class Session {
      * @return Fully qualified URL of the current page.
      */
     public URL getCurrentURL() {
-        return currentPage.getUrl();
+        return getCurrentPage().getUrl();
     }
 
     protected URL getContextUrl() {
@@ -31,11 +37,16 @@ public abstract class Session {
     }
 
     public WebPage getCurrentPage() {
-        return currentPage;
+        return history.peek();
     }
 
     protected void setCurrentPage(WebPage currentPage) {
-        this.currentPage = currentPage;
+        log.info("Current page: \"" + currentPage.getUrl().toString().substring(contextUrl.toString().length()-1) + "\"");
+        history.push(currentPage);
+    }
+
+    public void back() {
+        history.pop();
     }
 }
 

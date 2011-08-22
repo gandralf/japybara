@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 /**
@@ -99,9 +100,18 @@ public class WebTest {
         return session.getCurrentPage().getBody();
     }
 
+    // Assert methods (for cleaner messages
     protected void assertHasContent(String expected) {
         if (!getBody().contains(expected)) {
             fail("Expected content not found: \"" + expected + "\"");
         }
+    }
+
+    protected void assertCurrentPath(String expected) {
+        assertEquals(expected, getCurrentPath());
+    }
+
+    protected void back() {
+        session.back();
     }
 }

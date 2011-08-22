@@ -46,9 +46,37 @@ public class WebTestTest extends WebTest {
     public void shouldManipulateForm() throws IOException {
         WebPage page = visit("/form.html");
         page.fillIn("name", "John");
-        page.clickButton("submit");
+        page.click("submit");
 
         assertEquals("/hello", getCurrentPath());
         assertHasContent("Hello, John![post]");
+    }
+
+    @Test
+    public void shouldFollowLinks() throws IOException {
+        WebPage page = visit("/links.html");
+        page.click("form-link");
+
+        assertCurrentPath("/form.html");
+    }
+
+    @Test
+    public void shouldAcceptFlexibleSelectors() throws IOException {
+        thereAndBackAgain("id", "form-link");
+        thereAndBackAgain("content", "This is the form page");
+        thereAndBackAgain("href", "form.html");
+        thereAndBackAgain("js content", "Click me");
+    }
+
+    private void thereAndBackAgain(String method, String locator) throws IOException {
+        WebPage page = visit("/links.html");
+        page.click(locator);
+        if ("/form.html".equals(getCurrentPath())) {
+            assertCurrentPath("/form.html");
+            back();
+            assertCurrentPath("/links.html");
+        } else {
+            fail("Locator not found: \"" + locator + "\", method: " + method);
+        }
     }
 }
