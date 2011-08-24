@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.japybara</groupId>
     <artifactId>japybara</artifactId>
-    <version>0.2</version>
+    <version>0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Japybara</name>
@@ -26,8 +26,8 @@
 
     <scm>
         <url>http://github.com/gandralf/japybara</url>
-        <connection>scm:git:git://github.com/gandralf/japybara.git</connection>
-        <developerConnection>scm:git:git:git@github.com:gandralf/japybara.git</developerConnection>
+        <connection>scm:git://github.com/gandralf/japybara.git</connection>
+        <developerConnection>scm:git:git@github.com:gandralf/japybara.git</developerConnection>
     </scm>
 
     <properties>
