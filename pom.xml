@@ -22,6 +22,8 @@
 
     <scm>
         <url>http://github.com/gandralf/japybara</url>
+        <connection>scm:git:git://github.com/gandralf/japybara</connection>
+        <developerConnection>scm:git:git@github.com:gandralf/japybara.git</developerConnection>
     </scm>
 
     <properties>
@@ -140,4 +142,18 @@
             </build>
         </profile>
     </profiles>
+
+    <developers>
+        <developer>
+            <id>gandralf</id>
+            <name>Alexandre Gandra Lages</name>
+            <email>gandra@gmail.com</email>
+            <organization>Gonow</organization>
+            <organizationUrl>http://www.gonow.com.br</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>-4</timezone>
+        </developer>
+    </developers>
 </project>
