@@ -2,9 +2,12 @@ package org.japybara;
 
 import org.junit.Ignore;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import javax.naming.NamingException;
 import java.io.IOException;
+import java.sql.Driver;
 
 import static org.junit.Assert.*;
 
@@ -67,6 +70,14 @@ public class WebTestCaseTest extends WebTestCase {
         thereAndBackAgain("href", "form.html");
         thereAndBackAgain("js content", "Click me");
         thereAndBackAgain("selector", "div#content a");
+    }
+
+    @Test
+    public void shouldAcceptLabels() throws IOException {
+        visit("/links.html");
+        WebElement login = getDriver().findElement(By.id("login"));
+        fillIn("Login", "azdrubal");
+        assertEquals("azdrubal", login.getAttribute("value"));
     }
 
     private void thereAndBackAgain(String method, String locator) throws IOException {

@@ -100,6 +100,8 @@ public class WebTestCase {
 
     public void fillIn(String name, String content) {
         WebElement element = guessElement(name);
+        element.click();
+        element.clear();
         element.sendKeys(content);
     }
 
