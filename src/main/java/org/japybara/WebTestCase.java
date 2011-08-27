@@ -1,11 +1,14 @@
 package org.japybara;
 
-import org.japybara.htmlunit.HtmlUnitSession;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.webapp.WebAppContext;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -58,55 +61,64 @@ import static org.junit.Assert.fail;
 public class WebTestCase {
     protected static Server server;
     private static URL contextUrl;
-    private Session session;
+    private WebDriver driver;
 
     @BeforeClass
     public static void startServer() throws Exception {
         contextUrl = new URL(System.getProperty("japybara.app_host", "http://localhost:8080/"));
         String webappPath = System.getProperty("japybara.webapp", "./src/main/webapp");
 
-        server = new Server(contextUrl.getPort());
-        WebAppContext webapp = new WebAppContext(webappPath, contextUrl.getPath());
+        if (server == null || !server.isStarted()) {
+            server = new Server(contextUrl.getPort());
+            WebAppContext webapp = new WebAppContext(webappPath, contextUrl.getPath());
 
-        server.addHandler(webapp);
+            server.addHandler(webapp);
 
-        server.start();
-    }
-
-    @AfterClass
-    public static void stopServer() throws Exception {
-        server.stop();
+            server.start();
+        }
     }
 
     @Before
     public void setUp() throws MalformedURLException {
-        session = new HtmlUnitSession(contextUrl);
+        driver = new HtmlUnitDriver(true);
     }
 
-    public WebPage visit(String path) throws IOException {
-        return session.visit(path);
-    }
-
-    public WebPage getCurrentPage() {
-        return session.getCurrentPage();
+    public WebDriver getDriver() {
+        return driver;
     }
 
     // Helper methods
-    public String getCurrentPath() {
-        return session.getCurrentURL().getPath();
+
+    public void visit(String path) throws IOException {
+        driver.get(new URL(contextUrl, path).toString());
+    }
+
+    public void click(String locator) {
+        WebElement element = guessElement(locator);
+        element.click();
+    }
+
+    public void fillIn(String name, String content) {
+        WebElement element = guessElement(name);
+        element.sendKeys(content);
+    }
+
+    private WebElement guessElement(String name) {
+        ElementFinder finder = new ElementFinder(driver);
+        return finder.guessElement(name);
     }
 
     /**
      * @return a snapshot of the HTML of the current document, as it looks right now
      *      (potentially modified by JavaScript).
      */
-    public String getBody() {
-        return session.getCurrentPage().getBody();
+    public String getContent() {
+        return driver.getPageSource();
     }
 
-    // Assert methods (for cleaner messages
+    // Assert methods (for cleaner messages)
     protected void assertHasContent(String expected) {
-        if (!getBody().contains(expected)) {
+        if (!getContent().contains(expected)) {
             fail("Expected content not found: \"" + expected + "\"");
         }
     }
@@ -115,7 +127,15 @@ public class WebTestCase {
         assertEquals(expected, getCurrentPath());
     }
 
+    public String getCurrentPath() {
+        try {
+            return new URL(driver.getCurrentUrl()).getPath();
+        } catch (MalformedURLException e){
+            throw new IllegalStateException(e);
+        }
+    }
+
     protected void back() {
-        session.back();
+        driver.navigate().back();
     }
 }

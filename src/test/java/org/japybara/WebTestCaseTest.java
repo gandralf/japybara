@@ -23,10 +23,10 @@ public class WebTestCaseTest extends WebTestCase {
 
     @Test
     public void shouldHandleHttpStuff() throws IOException {
-        WebPage page = visit("/hello?name=John");
-        assertEquals("/hello", getCurrentPath()); // Parameters
+        visit("/hello?name=John");
+        assertCurrentPath("/hello"); // Parameters
         assertHasContent("John");
-        assertEquals("text/plain", page.getContentType());
+        // assertEquals("text/plain", page.getContentType());
     }
 
     @Test
@@ -44,18 +44,18 @@ public class WebTestCaseTest extends WebTestCase {
 
     @Test
     public void shouldManipulateForm() throws IOException {
-        WebPage page = visit("/form.html");
-        page.fillIn("name", "John");
-        page.click("submit");
+        visit("/form.html");
+        fillIn("name", "John");
+        click("submit");
 
-        assertEquals("/hello", getCurrentPath());
+        assertCurrentPath("/hello");
         assertHasContent("Hello, John![post]");
     }
 
     @Test
     public void shouldFollowLinks() throws IOException {
-        WebPage page = visit("/links.html");
-        page.click("form-link");
+        visit("/links.html");
+        click("form-link");
 
         assertCurrentPath("/form.html");
     }
@@ -66,11 +66,12 @@ public class WebTestCaseTest extends WebTestCase {
         thereAndBackAgain("content", "This is the form page");
         thereAndBackAgain("href", "form.html");
         thereAndBackAgain("js content", "Click me");
+        thereAndBackAgain("selector", "div#content a");
     }
 
     private void thereAndBackAgain(String method, String locator) throws IOException {
-        WebPage page = visit("/links.html");
-        page.click(locator);
+        visit("/links.html");
+        click(locator);
         if ("/form.html".equals(getCurrentPath())) {
             assertCurrentPath("/form.html");
             back();
