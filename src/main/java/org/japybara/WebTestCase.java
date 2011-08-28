@@ -1,11 +1,10 @@
 package org.japybara;
 
-import org.junit.AfterClass;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.webapp.WebAppContext;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -62,6 +61,7 @@ public class WebTestCase {
     protected static Server server;
     private static URL contextUrl;
     private WebDriver driver;
+    public enum PredefinedHtmlUnitDrivers { Firefox, IE8 }
 
     @BeforeClass
     public static void startServer() throws Exception {
@@ -78,14 +78,35 @@ public class WebTestCase {
         }
     }
 
+    /**
+     * Creates a HtmlUnitDriver emulating IE8. Override this method to use another one.
+     */
     @Before
-    public void setUp() throws MalformedURLException {
-        driver = new HtmlUnitDriver(true);
+    public void setUpWebDriver() {
+        setDriver(PredefinedHtmlUnitDrivers.IE8);
+    }
+
+    public void setDriver(PredefinedHtmlUnitDrivers driverKind) {
+        HtmlUnitDriver htmlUnitDriver;
+        switch (driverKind) {
+            case Firefox: htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_3_6); break;
+            case IE8: htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.INTERNET_EXPLORER_8); break;
+            default: throw new IllegalArgumentException("Not implemented: " + driverKind);
+        }
+
+        htmlUnitDriver.setJavascriptEnabled(true);
+
+        setDriver(htmlUnitDriver);
     }
 
     public WebDriver getDriver() {
         return driver;
     }
+
+    public void setDriver(WebDriver driver) {
+        this.driver = driver;
+    }
+
 
     // Helper methods
 

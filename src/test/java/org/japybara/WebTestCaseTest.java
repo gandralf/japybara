@@ -1,17 +1,24 @@
 package org.japybara;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import org.junit.AfterClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import javax.naming.NamingException;
 import java.io.IOException;
-import java.sql.Driver;
 
 import static org.junit.Assert.*;
 
 public class WebTestCaseTest extends WebTestCase {
+    @AfterClass
+    public static void shutDownJetty() throws Exception {
+        server.stop();
+    }
+
     @Test
     public void shouldHit() throws IOException {
         visit("/hello");
@@ -78,6 +85,12 @@ public class WebTestCaseTest extends WebTestCase {
         WebElement login = getDriver().findElement(By.id("login"));
         fillIn("Login", "azdrubal");
         assertEquals("azdrubal", login.getAttribute("value"));
+    }
+
+    @Test
+    public void shouldUseFirefoxDriver() throws IOException {
+        setDriver(PredefinedHtmlUnitDrivers.Firefox);
+        shouldAcceptFlexibleSelectors();
     }
 
     private void thereAndBackAgain(String method, String locator) throws IOException {
