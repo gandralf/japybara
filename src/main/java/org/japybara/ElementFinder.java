@@ -9,7 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-public class ElementFinder {
+class ElementFinder {
     private WebDriver driver;
     private WebElement foundElement;
 
@@ -26,7 +26,7 @@ public class ElementFinder {
                 safeFindElementByHRef(locator)) {
             return foundElement;
         } else {
-            throw new NoSuchElementException("Cant't find element " + locator);
+            throw new NoSuchElementException("Can't find element " + locator);
         }
 
     }

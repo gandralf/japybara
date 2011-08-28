@@ -2,12 +2,21 @@ package org.japybara;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import org.junit.Test;
+import org.mortbay.jetty.Server;
 
 import java.net.URL;
 
 import static org.junit.Assert.assertTrue;
 
-public class JapybaraServerTest {
+public class JettyServerTest {
+    @Test
+    public void shouldUseJetty() throws Exception {
+        WebTestServer server = new JettyServer();
+        server.start(new URL("http://localhost:8081"), "./src/test/webapp");
+        assertTrue(server.getWebServer() instanceof Server);
+        server.stop();
+    }
+
     @Test
     public void shouldAcceptAllParams() throws Exception {
         URL url = new URL("http://localhost:8081");
@@ -36,9 +45,9 @@ public class JapybaraServerTest {
     }
 
     private void makeMyDay(URL url, String[] params) throws Exception {
-        JapybaraServer.main(params);
+        JettyServer.main(params);
         WebClient webClient = new WebClient();
         assertTrue(webClient.getPage(url).getWebResponse().getContentAsString().contains("This is a static html file"));
-        JapybaraServer.stop();
+        JettyServer.mainInstance.stop();
     }
 }
