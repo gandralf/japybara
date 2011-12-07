@@ -23,6 +23,7 @@ just do it:
     }
 
 So, running this simple test case actually does the following:
+
 * Starts Jetty (port 8080)
 * Deploys your web application in the context "/". So, it is accessible at URL http://localhost:8080/
 * `visit("/hello/jmalk")`: makes an http request (GET) to http://localhost:8080/hello/jmalk
