@@ -1,5 +1,7 @@
-Japybara - web functional/integration/acceptance tests made easy
-================================================================
+Japybara
+========
+
+_Web functional/integration/acceptance tests for Java made easy_
 
 Japybara is a library intended to make functional tests *as simple as possible*. So, don't expect a
 super-flexible API.
